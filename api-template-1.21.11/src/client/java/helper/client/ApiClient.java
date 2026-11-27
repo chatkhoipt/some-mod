@@ -136,9 +136,9 @@ public class ApiClient implements ClientModInitializer {
         Vec3 eye = mc.player.getEyePosition();
         BlockPos best = null;
         double bd = 1e18;
-        for (int dx = -6; dx <= 6; dx++) {
-            for (int dy = -6; dy <= 6; dy++) {
-                for (int dz = -6; dz <= 6; dz++) {
+        for (int dx = -64; dx <= 64; dx++) {
+            for (int dy = -64; dy <= 64; dy++) {
+                for (int dz = -64; dz <= 64; dz++) {
                     BlockPos p = origin.offset(dx, dy, dz);
                     if (mc.level.getBlockState(p).is(target)) {
                         double d = eye.distanceToSqr(Vec3.atCenterOf(p));
