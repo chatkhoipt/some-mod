@@ -11,7 +11,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.protocol.game.ServerboundSelectTradePacket;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.EnchantmentMenu;
 import net.minecraft.world.inventory.MerchantMenu;
@@ -35,7 +36,7 @@ public class ApiClient implements ClientModInitializer {
     // CHANGE THIS to your own secret. Anyone without it gets nothing.
     private static final String KEY = "daukhoi";
     // "127.0.0.1" = this PC only. Use "0.0.0.0" to allow phones/other PCs on your Wi-Fi.
-    private static final String BIND = "0.0.0.0";
+    private static final String BIND = "127.0.0.1";
     private static final int PORT = 8080;
 
     private static volatile String players = "{\"players\":[]}";
@@ -106,10 +107,11 @@ public class ApiClient implements ClientModInitializer {
 
     private static String openVillager(Minecraft mc) {
         if (mc.player == null || mc.level == null || mc.gameMode == null) return "not in a world";
-        AbstractVillager best = null;
+        Entity best = null;
         double bd = 1e9;
-        for (AbstractVillager v : mc.level.getEntitiesOfClass(AbstractVillager.class,
+        for (Entity v : mc.level.getEntitiesOfClass(Entity.class,
                 mc.player.getBoundingBox().inflate(8))) {
+            if (v.getType() != EntityType.VILLAGER && v.getType() != EntityType.WANDERING_TRADER) continue;
             double d = mc.player.distanceTo(v);
             if (d < bd) { bd = d; best = v; }
         }
