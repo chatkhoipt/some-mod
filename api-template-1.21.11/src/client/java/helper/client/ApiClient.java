@@ -36,7 +36,7 @@ public class ApiClient implements ClientModInitializer {
     // CHANGE THIS to your own secret. Anyone without it gets nothing.
     private static final String KEY = "daukhoi";
     // "127.0.0.1" = this PC only. Use "0.0.0.0" to allow phones/other PCs on your Wi-Fi.
-    private static final String BIND = "127.0.0.1";
+    private static final String BIND = "0.0.0.0";
     private static final int PORT = 8080;
 
     private static volatile String players = "{\"players\":[]}";
