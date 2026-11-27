@@ -147,7 +147,7 @@ public class ApiClient implements ClientModInitializer {
                 }
             }
         }
-        if (best == null) return "no " + label + " within 6 blocks";
+        if (best == null) return "no " + label + " within 64 blocks";
         return useBlock(mc, best);
     }
 
